@@ -72,12 +72,3 @@ def fetch_and_save_commits(query, sort='stars', order='desc', per_page=10):
         print("Commits saved to the database successfully!")
     except requests.exceptions.RequestException as error:
         print("Error making the API request:", error)
-
-# Example usage: fetch and save popular commits related to Python
-fetch_and_save_commits('language:python')
-
-# Example usage: fetch and save popular commits related to JavaScript, sorted by followers count
-fetch_and_save_commits('language:javascript', sort='followers')
-
-# Example usage: fetch and save popular commits related to Ruby, sorted by relevance
-fetch_and_save_commits('language:ruby', sort='relevance')
