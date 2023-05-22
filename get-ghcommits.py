@@ -9,7 +9,7 @@ API_URL = 'https://api.github.com/search/commits'
 def get_popular_commits(start_date='', end_date=date.today().isoformat(), export_type='mysql', popularity_metric='stars', min_popularity=100, language='', auth_token=''):
     # Setup query parameters for the API
     params = {
-        'q': f'{popularity_metric}:{min_popularity}',
+        'q': f'{popularity_metric}:>={min_popularity}',
         'sort': popularity_metric,
         'per_page': 100
     }
@@ -56,8 +56,6 @@ def save_to_mysql(commits):
             CREATE TABLE IF NOT EXISTS repositories (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 repository_url VARCHAR(255),
-                repository_stars INT,
-                repository_followers INT,
                 repository_owner VARCHAR(255)
             )
         """)
@@ -78,8 +76,6 @@ def save_to_mysql(commits):
 
         for commit in commits:
             repository_url = commit['repository']['html_url']
-            repository_stars = commit['repository']['stargazers_count']
-            repository_followers = commit['repository']['followers']
             repository_owner = commit['repository']['owner']['login']
             author = repository_owner
             committer = commit['commit']['committer']['name']
@@ -100,8 +96,8 @@ def save_to_mysql(commits):
             else:
                 # Insert the repository info
                 cursor.execute(f"""
-                    INSERT INTO repositories (repository_url, repository_stars, repository_followers, repository_owner)
-                    VALUES ('{repository_url}', {repository_stars}, {repository_followers}, '{repository_owner}')
+                    INSERT INTO repositories (repository_url, repository_owner)
+                    VALUES ('{repository_url}', '{repository_owner}')
                 """)
 
                 # Get the last inserted ID
