@@ -88,7 +88,7 @@ def save_to_mysql(commits):
 
             # Escape special characters
             message = message.replace("'", "''")
-            conversations = conversations.replace("'", "''")
+            # conversations = conversations.replace("'", "''")
 
             # Check if the repository already exists
             cursor.execute(f"SELECT id FROM repositories WHERE repository_url = '{repository_url}'")
@@ -165,9 +165,9 @@ def get_commit_conversations(commit_url):
         commit_data = response.json()
 
         # Extract info
-        conversations = [comment['body'] for comment in commit_data['comments']]
+        # conversations = [comment['body'] for comment in commit_data['comments']]
 
-        return conversations
+        return commit_data
     except requests.exceptions.RequestException as err:
         log_info(f"An error occurred while fetching commit conversations: {err}", error=True)
 
