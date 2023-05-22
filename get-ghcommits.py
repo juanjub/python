@@ -1,12 +1,12 @@
 import requests
 import json
 import mysql.connector
-from datetime import datetime
+from datetime import datetime, date
 
 # GitHub API URL for searching commits
 API_URL = 'https://api.github.com/search/commits'
 
-def get_popular_commits(start_date, end_date=date.today().isoformat(), export_type='mysql', popularity_metric='stars', min_popularity=100, language='', auth_token=''):
+def get_popular_commits(start_date='', end_date=date.today().isoformat(), export_type='mysql', popularity_metric='stars', min_popularity=100, language='', auth_token=''):
     # Setup query parameters for the API
     params = {
         'q': f'{popularity_metric}:{min_popularity}',
