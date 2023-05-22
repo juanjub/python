@@ -80,7 +80,7 @@ def save_to_mysql(commits):
             author = repository_owner
             committer = commit['commit']['committer']['name']
             message = commit['commit']['message']
-            if commit['comment_count'] = 0:
+            if commit['comment_count'] == 0:
                 conversations = ''
             else:
                 conversations = get_commit_conversations(commit['comments_url'])
@@ -130,7 +130,7 @@ def save_to_json(commits):
         author = repository_owner
         committer = commit['commit']['committer']['name']
         message = commit['commit']['message']
-        if commit['comment_count'] = 0:
+        if commit['comment_count'] == 0:
             conversations = ''
         else:
             conversations = get_commit_conversations(commit['comments_url'])
