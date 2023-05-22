@@ -80,7 +80,10 @@ def save_to_mysql(commits):
             author = repository_owner
             committer = commit['commit']['committer']['name']
             message = commit['commit']['message']
-            conversations = get_commit_conversations(commit['comments_url'])
+            if commit['comment_count'] = 0:
+                conversations = ''
+            else:
+                conversations = get_commit_conversations(commit['comments_url'])
             commit_url = commit['html_url']
 
             # Escape special characters
@@ -127,7 +130,10 @@ def save_to_json(commits):
         author = repository_owner
         committer = commit['commit']['committer']['name']
         message = commit['commit']['message']
-        conversations = get_commit_conversations(commit['comments_url'])
+        if commit['comment_count'] = 0:
+            conversations = ''
+        else:
+            conversations = get_commit_conversations(commit['comments_url'])
         commit_url = commit['html_url']
 
         commit_data = {
