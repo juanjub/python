@@ -1,9 +1,4 @@
-# python scripts
-
-scripts and utils, just for fun :D  
-use them at your will.
-
-### Get-GHPublicCommints.py
+### Get-GHPublicCommits.py
 
 ```python
 # Example usage: fetch and save popular commits related to Python
